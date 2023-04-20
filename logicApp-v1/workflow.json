@@ -1,0 +1,44 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Send_an_email_(V2)_1": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "referenceName": "outlook"
+                        }
+                    },
+                    "method": "post",
+                    "body": {
+                        "To": "sandeshmorecomp@sanjivanicoe.org.in",
+                        "Subject": "logic-app",
+                        "Body": "hi",
+                        "Importance": "Normal"
+                    },
+                    "path": "/v2/Mail"
+                },
+                "runAfter": {}
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "When_a_blob_is_added_or_updated": {
+                "type": "ServiceProvider",
+                "inputs": {
+                    "parameters": {
+                        "path": "logic-blob"
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "AzureBlob-2",
+                        "operationId": "whenABlobIsAddedOrModified",
+                        "serviceProviderId": "/serviceProviders/AzureBlob"
+                    }
+                }
+            }
+        }
+    },
+    "kind": "Stateful"
+}
